@@ -1,5 +1,7 @@
 # now
 
+soon to be a small date library which will just deal with the time now.
+
 ## Installation
 ```bash
 $ npm install akileez\now
@@ -16,7 +18,7 @@ $ npm install akileez\now
 ```
 
 ## Why?
-
+to replace moment.js as my handlebars helper library for dates
 
 ## See Also
 -
