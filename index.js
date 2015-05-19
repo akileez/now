@@ -89,8 +89,7 @@ var L = ['th', 'st', 'nd', 'rd'][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d %
 var ordinal = d + L
 var thisQuarter = quarter()
 var getWEEk = getWeek()
-var daynum = currentDay()
-var leap = isLeapYear()
+var daynum = currentDayThisYear()
 var daysthisyear = daysInYear()
 var dim = daysInMonth().toString()
 var arrtest = []
@@ -153,16 +152,22 @@ function daysInYear () {
   return isLeapYear(thisyear) ? 366 : 365
 }
 
-function daysLeft (opt) {
-  if (opt === 'week') return 6 - thisday
-  if (opt === 'month') return daysinMonth() - day
-  if (opt === 'year') return daysInYear() - daynum
+function daysLeftThisWeek () {
+  return 6 - thisday
 }
 
-function currentDay () {
-  var now = new Date(date.getTime())
-  var first = new Date(date.setMonth(0, 0))
-  var diff = now - first
+function daysLeftThisMonth () {
+  return daysinMonth() - day
+}
+
+function daysLeftThisYear () {
+  return daysInYear() - daynum
+}
+
+function currentDayThisYear () {
+  var end = new Date(date.getTime())
+  var start = new Date(date.setMonth(0, 0))
+  var diff = end - start
   return Math.ceil(diff / 86400000).toString()
 }
 
@@ -185,6 +190,10 @@ function isNull (arr) {
   // return arr
   if (arr.length === 0) return true
   else return false
+}
+var msInDay = 1000 * 60 * 60 * 24
+function periodicMS () {
+  var ms
 }
 
 // tests
@@ -227,13 +236,17 @@ console.log('ordinal day: ', ordinal)
 console.log('this quarter: ', thisQuarter)
 console.log('days this month: ', dim)
 console.log('number of days this month: ', daysinMonth())
-console.log('is this a leap year? ', leap)
+console.log('is this a leap year? ', isLeapYear())
 console.log('how many days this year? ', daysthisyear)
-console.log('how many days left in this week: ', daysLeft('week'))
-console.log('how many days left in this month: ', daysLeft('month'))
-console.log('how many days left in this year: ', daysLeft('year'))
+console.log('how many days left in this week: ', daysLeftThisWeek())
+console.log('how many days left in this month: ', daysLeftThisMonth())
+console.log('how many days left in this year: ', daysLeftThisYear())
 console.log(chkarr)
-
+console.log('newDate: ', new Date(new Date().getTime()))
+console.log('firDate: ', new Date(new Date().setMonth(0, 0)))
+console.log('diff: ', new Date(new Date().getTime()) - new Date(new Date().setMonth(0, 0)))
+console.log('days: ', Math.ceil((new Date().getTime() - new Date(new Date().setMonth(0, 0))) / 86400000).toString())
+console.log(msInDay)
   // switch (frmt) {
   //   case 'now' : return  Date.now(); break;
   //   case 'iso' : return new Date().toLocaleString(); break;
