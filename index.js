@@ -6,6 +6,7 @@
  */
 
 var calendar = require('./lib/calendar')
+var frmt = require('./lib/formats')
 
 exports.format = {
   yy : function () {
@@ -94,7 +95,60 @@ var daysthisyear = daysInYear()
 var dim = daysInMonth().toString()
 var arrtest = []
 var arrtest1 = [1, 20]
+var arrtest2 = ['a', 'b', 'c', 'd'][2]
 var chkarr = isNull(arrtest1)
+
+var flags = {
+  d : day,
+  dd : pad(day),
+  dx : calendar.days.short.filter(dayOfWeek).toString(),
+  ddd : calendar.days.abbr.filter(dayOfWeek).toString(),
+  dddd : calendar.days.names.filter(dayOfWeek).toString(),
+  m : month,
+  mm : pad(month),
+  mmm : calendar.months.abbr.filter(monthOfYear).toString(),
+  mmmm : calendar.months.names.filter(monthOfYear).toString(),
+  yyyy : thisyear.toString(),
+  yy : year.slice(2),
+  dow : calendar.days.names.filter(dayOfWeek),
+  abbrDay : calendar.days.abbr.filter(dayOfWeek),
+  shortDay : calendar.days.short.filter(dayOfWeek).toString(),
+  mon : calendar.months.names.filter(monthOfYear),
+  mo : calendar.months.abbr.filter(monthOfYear),
+  h : hours % 12 || 12,
+  hh : pad(h),
+  H : hours,
+  HH : pad(hours),
+  M : mins,
+  MM : pad(mins),
+  S : secs,
+  SS : pad(secs),
+  s : ms,
+  ss : pad(ms, 3),
+  t : hours < 12 ? ' a' : ' p',
+  tt : hours < 12 ? ' am' : ' pm',
+  T : hours < 12 ? ' A' : ' P',
+  TT : hours < 12 ? ' AM' : ' PM'
+}
+
+function getDate (datetime, mask) {
+  var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZWN]|'[^']*'|'[^']*'/g
+  if (arguments.length === 1 && kindOf(datetime) === 'string' && !/\d/.test(datetime)) {
+    mask = datetime
+    datetime = undefined
+  }
+  console.log(/\d/.test(datetime))
+  datetime = datetime || new Date
+  if (!(datetime instanceof Date)) datetime = new Date(datetime)
+  if (isNaN(datetime)) throw TypeError('Invalid date')
+
+  mask = String(frmt[mask] || mask || frmt.default)
+  console.log(mask)
+  return mask.replace(token, function (match) {
+    if (match in flags) return flags[match]
+    return match.slice(1, match.length - 1)
+  })
+}
 
 function monthOfYear (val, idx, arr) {
   if (idx === thismonth) return val
@@ -133,6 +187,10 @@ function quarter () {
   if (thismonth < 9) return 3
   return 4
 }
+// testing new quarter calculation.
+function newQuarter () {
+  return (Math.ceil(month / 3))
+}
 
 function isLeapYear () {
   return thisyear % 400 === 0 || (thisyear % 100 !== 0 && thisyear % 4 === 0)
@@ -165,10 +223,11 @@ function daysLeftThisYear () {
 }
 
 function currentDayThisYear () {
+  var msid = 1000 * 60 * 60 * 24 // 86,400,000 ms
   var end = new Date(date.getTime())
   var start = new Date(date.setMonth(0, 0))
   var diff = end - start
-  return Math.ceil(diff / 86400000).toString()
+  return Math.ceil(diff / msid)
 }
 
 function yrRange (startyear) {
@@ -195,6 +254,28 @@ var msInDay = 1000 * 60 * 60 * 24
 function periodicMS () {
   var ms
 }
+
+function kindOf(val) {
+  if (val === null) {
+    return 'null';
+  }
+
+  if (val === undefined) {
+    return 'undefined';
+  }
+
+  if (typeof val !== 'object') {
+    return typeof val;
+  }
+
+  if (Array.isArray(val)) {
+    return 'array';
+  }
+
+  return {}.toString.call(val)
+    .slice(8, -1).toLowerCase();
+};
+
 
 // tests
 console.log(now)
@@ -245,8 +326,13 @@ console.log(chkarr)
 console.log('newDate: ', new Date(new Date().getTime()))
 console.log('firDate: ', new Date(new Date().setMonth(0, 0)))
 console.log('diff: ', new Date(new Date().getTime()) - new Date(new Date().setMonth(0, 0)))
-console.log('days: ', Math.ceil((new Date().getTime() - new Date(new Date().setMonth(0, 0))) / 86400000).toString())
+console.log('days: ', Math.ceil((new Date().getTime() - new Date(new Date().setMonth(0, 0))) / 86400000))
 console.log(msInDay)
+console.log(newQuarter())
+console.log(new Date(2016, 2, 0).getDate()) // this format works more efficently for number of days in month!!
+console.log(arrtest2)
+console.log(getDate('fullDate'))
+console.log(new Date(new Date))
   // switch (frmt) {
   //   case 'now' : return  Date.now(); break;
   //   case 'iso' : return new Date().toLocaleString(); break;
