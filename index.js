@@ -6,7 +6,7 @@
  */
 
 var calendar = require('./lib/calendar')
-var frmt = require('./lib/formats')
+var frmt     = require('./lib/formats')
 
 exports.format = {
   yy : function () {
@@ -99,36 +99,36 @@ var arrtest2 = ['a', 'b', 'c', 'd'][2]
 var chkarr = isNull(arrtest1)
 
 var flags = {
-  d : day,
-  dd : pad(day),
-  dx : calendar.days.short.filter(dayOfWeek).toString(),
-  ddd : calendar.days.abbr.filter(dayOfWeek).toString(),
-  dddd : calendar.days.names.filter(dayOfWeek).toString(),
-  m : month,
-  mm : pad(month),
-  mmm : calendar.months.abbr.filter(monthOfYear).toString(),
-  mmmm : calendar.months.names.filter(monthOfYear).toString(),
-  yyyy : thisyear.toString(),
-  yy : year.slice(2),
-  dow : calendar.days.names.filter(dayOfWeek),
-  abbrDay : calendar.days.abbr.filter(dayOfWeek),
+  d        : day,
+  dd       : pad(day),
+  dx       : calendar.days.short.filter(dayOfWeek).toString(),
+  ddd      : calendar.days.abbr.filter(dayOfWeek).toString(),
+  dddd     : calendar.days.names.filter(dayOfWeek).toString(),
+  m        : month,
+  mm       : pad(month),
+  mmm      : calendar.months.abbr.filter(monthOfYear).toString(),
+  mmmm     : calendar.months.names.filter(monthOfYear).toString(),
+  yyyy     : thisyear.toString(),
+  yy       : year.slice(2),
+  dow      : calendar.days.names.filter(dayOfWeek),
+  abbrDay  : calendar.days.abbr.filter(dayOfWeek),
   shortDay : calendar.days.short.filter(dayOfWeek).toString(),
-  mon : calendar.months.names.filter(monthOfYear),
-  mo : calendar.months.abbr.filter(monthOfYear),
-  h : hours % 12 || 12,
-  hh : pad(h),
-  H : hours,
-  HH : pad(hours),
-  M : mins,
-  MM : pad(mins),
-  S : secs,
-  SS : pad(secs),
-  s : ms,
-  ss : pad(ms, 3),
-  t : hours < 12 ? ' a' : ' p',
-  tt : hours < 12 ? ' am' : ' pm',
-  T : hours < 12 ? ' A' : ' P',
-  TT : hours < 12 ? ' AM' : ' PM'
+  mon      : calendar.months.names.filter(monthOfYear),
+  mo       : calendar.months.abbr.filter(monthOfYear),
+  h        : hours % 12 || 12,
+  hh       : pad(h),
+  H        : hours,
+  HH       : pad(hours),
+  M        : mins,
+  MM       : pad(mins),
+  S        : secs,
+  SS       : pad(secs),
+  s        : ms,
+  ss       : pad(ms, 3),
+  t        : hours < 12 ? ' a' : ' p',
+  tt       : hours < 12 ? ' am' : ' pm',
+  T        : hours < 12 ? ' A' : ' P',
+  TT       : hours < 12 ? ' AM' : ' PM'
 }
 
 function getDate (datetime, mask) {
