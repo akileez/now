@@ -8,14 +8,14 @@
 var calendar = require('./lib/calendar')
 var frmt     = require('./lib/formats')
 
-exports.format = {
-  yy : function () {
-    return year.slice(2)
-  },
-  yyyy : function () {
-    return year.toString()
-  }
-}
+// exports.format = {
+//   yy : function () {
+//     return year.slice(2)
+//   },
+//   yyyy : function () {
+//     return year.toString()
+//   }
+// }
 
 // core
 var date = new Date()
@@ -128,7 +128,8 @@ var flags = {
   t        : hours < 12 ? ' a' : ' p',
   tt       : hours < 12 ? ' am' : ' pm',
   T        : hours < 12 ? ' A' : ' P',
-  TT       : hours < 12 ? ' AM' : ' PM'
+  TT       : hours < 12 ? ' AM' : ' PM',
+  Z        : (offset > 0 ? '-' : '+') + pad(Math.floor(Math.abs(offset) / 60) * 100 + Math.abs(offset) % 60, 4)
 }
 
 function getDate (datetime, mask) {
@@ -331,7 +332,7 @@ console.log(msInDay)
 console.log(newQuarter())
 console.log(new Date(2016, 2, 0).getDate()) // this format works more efficently for number of days in month!!
 console.log(arrtest2)
-console.log(getDate('fullDate'))
+console.log(getDate('isoDateTime'))
 console.log(new Date(new Date))
   // switch (frmt) {
   //   case 'now' : return  Date.now(); break;
