@@ -46,7 +46,7 @@ module.exports = function (date, mask) {
   var daysleftthismonth = daysLeftThisMonth()
   var daysleftthisyear = daysLeftThisYear()
 
-  var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMSsTt])\1?|[LloOZWQNv]|u{1,2}|x{1,3}|'[^']*'|'[^']*'/g
+  var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMSsTt])\1?|[LloOZWQNv]|u{1,2}|x{1,3}|'[^']*'/g
   var flags = {
     d        : day,
     dd       : pad(day),
@@ -102,7 +102,6 @@ module.exports = function (date, mask) {
   }
 
   function getWeek() {
-    var date = new Date()
     // Remove time components of date
     var targetThursday = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
