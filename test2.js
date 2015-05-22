@@ -1,6 +1,6 @@
 var getDate = require('./test')
 
-var past = new Date(1959, 2, 11, 13, 29, 45)
+var past = new Date(1980, 2, 11, 13, 29, 45)
 var present = new Date()
 
 function log (str, attr) {
@@ -57,7 +57,7 @@ log('days left this month: ', 'xx')
 log('days left this year: ', 'xxx')
 log('is leap year? ', 'v')
 console.log()
-console.log('------------ FORMATS -----------------')
+console.log('------------ FORMATS (MASKS) -----------------')
 frmt('default')
 frmt('now')
 frmt('shortDate')
