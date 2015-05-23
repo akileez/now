@@ -5,8 +5,12 @@
  * Licensed under the ISC license.
  */
 
-var calendar = require('./lib/calendar')
 var frmt     = require('./lib/formats')
+
+var cal = {
+  days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  mons: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+}
 
 module.exports = function (date, mask) {
   if (arguments.length === 1 && kindOf(date) === 'string' && !/\d/.test(date)) {
@@ -37,6 +41,8 @@ module.exports = function (date, mask) {
 
   var ordinal = day + ['th', 'st', 'nd', 'rd'][day % 10 > 3 ? 0 : (day % 100 - day % 10 != 10) * day % 10]
 
+  var dayNames = cal.days.filter(dayOfWeek).toString()
+  var monNames = cal.mons.filter(monthOfYear).toString()
   var thisweek = getWeek()
   var thisquarter = getQuarter()
   var daythisyear = getDayNumOfYear()
@@ -50,12 +56,12 @@ module.exports = function (date, mask) {
   var flags = {
     d        : day,
     dd       : pad(day),
-    ddd      : calendar.days.abbr.filter(dayOfWeek).toString(),
-    dddd     : calendar.days.names.filter(dayOfWeek).toString(),
+    ddd      : dayNames.slice(0, 3),
+    dddd     : dayNames,
     m        : month,
     mm       : pad(month),
-    mmm      : calendar.months.abbr.filter(monthOfYear).toString(),
-    mmmm     : calendar.months.names.filter(monthOfYear).toString(),
+    mmm      : monNames.slice(0, 3),
+    mmmm     : monNames,
     yyyy     : year,
     yy       : year.slice(2),
     h        : hr,
@@ -83,7 +89,8 @@ module.exports = function (date, mask) {
     xxx      : daysleftthisyear,
     v        : isLeapYear(),
     o        : ordinal,
-    O        : calendar.days.short.filter(dayOfWeek).toString()
+    O        : dayNames.slice(0, 2),
+    L        : dayNames.slice(0, 1)
   }
 
   mask = String(frmt[mask] || mask || frmt.default)
