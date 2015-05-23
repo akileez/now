@@ -1,11 +1,12 @@
 var getDate = require('../index')
 
+var date = new Date(2015, 6, 29, 6, 31, 21)
 function log (attr) {
-  console.log(getDate(attr))
+  console.log(getDate(date, attr))
 }
 
 console.log()
-console.log(new Date().toLocaleString())
+console.log(new Date(2015, 6, 29, 6, 31, 21).toLocaleString())
 console.log()
 console.log('------------ FORMATS (MASKS) -----------------')
 log('default')
