@@ -1,6 +1,6 @@
 {
   "name": "now",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "An awesome module being created",
   "main": "index.js",
   "scripts": {
@@ -21,10 +21,7 @@
   "bugs": {
     "url": "https://github.com/akileez/now/issues"
   },
-  "license": {
-    "type": "ISC",
-    "url": "https://github.com/akileez/now/blob/master/LICENSE"
-  },
+  "license": "ISC",
   "keywords": [],
   "dependencies": {
   },
