@@ -20,7 +20,8 @@ module.exports = function (date, mask) {
   // console.log(/\d/.test(date))
   date = date || new Date
   // console.log('date: ', date)
-  if ((date instanceof Date)) date = new Date(date)
+  if (date instanceof Date) date = new Date(date)
+  else date = new Date(Date.parse(date))
   if (isNaN(date)) throw TypeError('Invalid date')
 
   var thisday = date.getDay()
@@ -94,7 +95,7 @@ module.exports = function (date, mask) {
   }
 
   mask = String(frmt[mask] || mask || frmt.default)
-  process.stdout.write('mask: ' + mask + '  ')
+  // process.stdout.write('mask: ' + mask + '  ')
   return mask.replace(token, function (match) {
     if (match in flags) return flags[match]
     return match.slice(1, match.length - 1)
