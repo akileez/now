@@ -1,6 +1,6 @@
 # now
 
-soon to be a small date library which will just deal with the time now.
+deprecated - use [clockin](https://github.com/akileez/clockin) instead 
 
 ## Installation
 ```bash
