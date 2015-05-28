@@ -1,6 +1,6 @@
 {
   "name": "now",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "An awesome module being created",
   "main": "index.js",
   "scripts": {
