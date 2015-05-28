@@ -5,8 +5,8 @@
  * Licensed under the ISC license.
  */
 
-var calendar = require('./lib/calendar')
-var frmt     = require('./lib/formats')
+var calendar = require('../lib/calendar')
+var frmt     = require('../lib/formats')
 
 // exports.format = {
 //   yy : function () {
@@ -92,7 +92,7 @@ var thisQuarter = quarter()
 var getWEEk = getWeek()
 var daynum = currentDayThisYear()
 var daysthisyear = daysInYear()
-var dim = daysInMonth().toString()
+// var dim = daysInMonth().toString()
 var arrtest = []
 var arrtest1 = [1, 20]
 var arrtest2 = ['a', 'b', 'c', 'd'][2]
@@ -316,7 +316,7 @@ console.log('iso week: ', getWEEk)
 console.log('day number of year: ', daynum)
 console.log('ordinal day: ', ordinal)
 console.log('this quarter: ', thisQuarter)
-console.log('days this month: ', dim)
+// console.log('days this month: ', dim)
 console.log('number of days this month: ', daysinMonth())
 console.log('is this a leap year? ', isLeapYear())
 console.log('how many days this year? ', daysthisyear)
